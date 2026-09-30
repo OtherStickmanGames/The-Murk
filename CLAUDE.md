@@ -13,7 +13,7 @@
 - Burst, Collections, Mathematics и Newtonsoft.Json должны быть явно прописаны в `Packages/manifest.json`, а не держаться на зависимостях других пакетов.
 - Цель — Android: IL2CPP, ARM64, только портретная ориентация.
 - Новые пакеты не добавлять без согласия автора.
-- Репозиторий: `origin` → приватный `gitlab.com/Woger/the-murk`. Бинарные файлы (картинки, звук, модели, шрифты) идут через Git LFS по правилам в `.gitattributes`.
+- Репозиторий: `origin` → `github.com/OtherStickmanGames/The-Murk`, основная ветка — `master`. Бинарные файлы (картинки, звук, модели, шрифты) идут через Git LFS по правилам в `.gitattributes`.
 
 ## Структура
 
