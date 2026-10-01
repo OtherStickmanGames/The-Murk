@@ -1,0 +1,5 @@
+<linker>
+  <!-- Defs are created by Newtonsoft.Json through reflection; IL2CPP stripping must keep their setters. -->
+  <assembly fullname="Game.Sim" preserve="all" />
+  <assembly fullname="Game.Gen" preserve="all" />
+</linker>

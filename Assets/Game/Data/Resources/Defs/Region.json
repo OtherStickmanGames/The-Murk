@@ -1,0 +1,11 @@
+{
+  "sizeX": 160,
+  "sizeY": 64,
+  "sizeZ": 160,
+  "bedrockLayers": 4,
+  "bedrockBlock": "bedrock",
+  "minSurface": 32,
+  "maxSurface": 56,
+  "waterLevel": 35,
+  "biome": "forest_hills"
+}

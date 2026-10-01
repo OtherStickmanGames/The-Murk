@@ -2,15 +2,20 @@
   "name": "Game.Gen",
   "rootNamespace": "Game.Gen",
   "references": [
-    "Game.Sim"
+    "Game.Sim",
+    "Unity.Burst",
+    "Unity.Collections",
+    "Unity.Mathematics"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,
   "overrideReferences": true,
-  "precompiledReferences": [],
+  "precompiledReferences": [
+    "Newtonsoft.Json.dll"
+  ],
   "autoReferenced": false,
   "defineConstraints": [],
   "versionDefines": [],
-  "noEngineReferences": true
+  "noEngineReferences": false
 }

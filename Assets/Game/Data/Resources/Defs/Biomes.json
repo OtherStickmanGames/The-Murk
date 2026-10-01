@@ -1,0 +1,38 @@
+[
+  {
+    "id": "forest_hills",
+    "label": "Лесистые холмы",
+    "surfaceBlock": "grass",
+    "subsurfaceBlock": "dirt",
+    "shoreBlock": "sand",
+    "stoneBlock": "stone",
+    "waterBlock": "water",
+    "subsurfaceDepth": 3,
+    "shoreHeight": 1,
+    "terrain": {
+      "baseHeight": 38,
+      "plains": { "frequency": 0.015, "octaves": 3 },
+      "plainsAmplitude": 3,
+      "hills": { "frequency": 0.025, "octaves": 4 },
+      "hillsAmplitude": 18,
+      "hillMask": { "frequency": 0.009, "octaves": 2 },
+      "hillMaskThreshold": 0.0,
+      "hillMaskBlend": 0.3
+    },
+    "rivers": {
+      "noise": { "frequency": 0.007, "octaves": 2 },
+      "width": 0.05,
+      "bankWidth": 0.12,
+      "bedDepth": 3
+    },
+    "ores": [
+      { "block": "coal_ore", "minDepth": 0, "maxDepth": 6, "noise": { "frequency": 0.12 }, "threshold": 0.55 },
+      { "block": "clay", "minDepth": 0, "maxDepth": 6, "noise": { "frequency": 0.08 }, "threshold": 0.55 },
+      { "block": "copper_ore", "minDepth": 6, "maxDepth": 16, "noise": { "frequency": 0.12 }, "threshold": 0.6 },
+      { "block": "iron_ore", "minDepth": 6, "maxDepth": 16, "noise": { "frequency": 0.12 }, "threshold": 0.62 },
+      { "block": "silver_ore", "minDepth": 16, "maxDepth": 28, "noise": { "frequency": 0.14 }, "threshold": 0.66 },
+      { "block": "gold_ore", "minDepth": 16, "maxDepth": 28, "noise": { "frequency": 0.14 }, "threshold": 0.7 },
+      { "block": "murk_crystal", "minDepth": 16, "maxDepth": 28, "noise": { "frequency": 0.16 }, "threshold": 0.74 }
+    ]
+  }
+]

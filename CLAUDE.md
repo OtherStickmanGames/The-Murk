@@ -21,7 +21,7 @@
 ```
 Assets/Game/
   Sim/     Game.Sim   (без UnityEngine): мир, воксельные данные, поселенцы, работы, бой, экономика, сохранения
-  Gen/     Game.Gen   (без UnityEngine): генерация региона по сиду
+  Gen/     Game.Gen   : генерация региона по сиду (Burst-jobs, без MonoBehaviour и сцены)
   Voxel/   Game.Voxel : меши чанков (Burst), перестройка при изменении блоков
   View/    Game.View  : модели, анимации, камера, эффекты
   UI/      Game.UI    : экраны, шторки, жесты
@@ -34,13 +34,13 @@ Assets/Tests/EditMode/          тесты Sim и Gen
 docs/                           GDD и задачи
 ```
 
-Каждая папка с кодом — отдельный asmdef. У `Game.Sim` и `Game.Gen` стоит `noEngineReferences: true`.
+Каждая папка с кодом — отдельный asmdef. У `Game.Sim` стоит `noEngineReferences: true`. `Game.Gen` ссылается на UnityEngine ради Job System и Burst, но MonoBehaviour и сцену не трогает.
 
 Ссылки между сборками: Gen → Sim; Voxel → Sim; View → Sim, Voxel; UI → Sim, View; DevTools → Sim, UI; App → все; EditorTools → App.
 
 Пространства имён `Game.Debug` и `Game.Editor` не заводить: внутри `Game.*` они перекрывают `UnityEngine.Debug` и `UnityEditor.Editor`.
 
-Хранилище блоков в `Game.Sim` — на обычных массивах: `NativeArray` живёт в UnityEngine. Для Burst `Game.Voxel` копирует данные чанка в `NativeArray`.
+Хранилище блоков в `Game.Sim` — на обычных массивах: `NativeArray` живёт в UnityEngine. Для Burst `Game.Gen` и `Game.Voxel` работают с `NativeArray` и копируют данные в чанки и обратно.
 
 ## Архитектура — обязательно
 

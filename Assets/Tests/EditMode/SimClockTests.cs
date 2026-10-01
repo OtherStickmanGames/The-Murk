@@ -1,4 +1,5 @@
 using Game.Sim;
+using Game.Sim.Blocks;
 using NUnit.Framework;
 
 namespace Game.Tests
@@ -62,7 +63,7 @@ namespace Game.Tests
         [Test]
         public void SimulationStep_IncrementsTick()
         {
-            var sim = new GameSimulation();
+            var sim = new GameSimulation(BlockRegistry.FromJson("[]"), new VoxelWorld(1, 1, 1), 1);
             sim.Step();
             sim.Step();
 

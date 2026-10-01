@@ -1,5 +1,7 @@
 using Game.DevTools;
+using Game.Gen;
 using Game.Sim;
+using Game.Sim.Blocks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -21,12 +23,21 @@ namespace Game.App
             if (_panelSettings == null)
                 Debug.LogError("Bootstrap: PanelSettings is not assigned. Run 'The Murk/Rebuild Bootstrap Scene'.", this);
 
-            _simulation = new GameSimulation();
+            var blocks = BlockRegistry.FromJson(ContentLoader.LoadDef("Blocks"));
+            var genDefs = GenDefs.Parse(ContentLoader.LoadDef("Region"), ContentLoader.LoadDef("Biomes"));
+            var generator = new RegionGenerator(genDefs, blocks);
+
+            var world = generator.CreateWorld();
+            var seed = SeedSource.NewSeed();
+            LogGeneration(generator.Generate(world, seed));
+
+            _simulation = new GameSimulation(blocks, world, seed);
             _clock = new SimClock();
 
             var uiDocument = CreateUiDocument("DevConsoleUI", sortingOrder: 1000);
             _devConsole = new DevConsole(uiDocument.rootVisualElement, new DebugCommandRegistry());
             SimCommands.Register(_devConsole.Commands, _simulation, _clock);
+            WorldCommands.Register(_devConsole.Commands, _simulation, generator, LogGeneration);
         }
 
         private void Update()
@@ -36,6 +47,11 @@ namespace Game.App
                 _simulation.Step();
 
             _devConsole.Update(Time.unscaledDeltaTime);
+        }
+
+        private static void LogGeneration(GenerationReport report)
+        {
+            Debug.Log("[Gen] " + report);
         }
 
         private UIDocument CreateUiDocument(string name, int sortingOrder)

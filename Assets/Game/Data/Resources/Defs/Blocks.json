@@ -1,0 +1,15 @@
+[
+  { "id": "grass", "label": "Трава", "isSolid": true },
+  { "id": "dirt", "label": "Земля", "isSolid": true },
+  { "id": "sand", "label": "Песок", "isSolid": true },
+  { "id": "stone", "label": "Камень", "isSolid": true },
+  { "id": "bedrock", "label": "Дно мира", "isSolid": true, "isIndestructible": true },
+  { "id": "water", "label": "Вода", "isLiquid": true },
+  { "id": "clay", "label": "Глина", "isSolid": true },
+  { "id": "coal_ore", "label": "Уголь", "isSolid": true },
+  { "id": "copper_ore", "label": "Медная руда", "isSolid": true },
+  { "id": "iron_ore", "label": "Железная руда", "isSolid": true },
+  { "id": "silver_ore", "label": "Серебряная руда", "isSolid": true },
+  { "id": "gold_ore", "label": "Золотая руда", "isSolid": true },
+  { "id": "murk_crystal", "label": "Кристалл Хмари", "isSolid": true }
+]
