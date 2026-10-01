@@ -10,6 +10,7 @@
 
 - Unity 6000.6.2f1, URP (для телефона — `Assets/Settings/Mobile_RPAsset.asset`), C#.
 - Input System (уже установлен), Unity Test Framework.
+- Интерфейс — UI Toolkit (UXML/USS или код), не uGUI. Настройки панели — `Assets/Game/UI/Settings/GamePanelSettings.asset`, эталон 1080×1920, масштаб по ширине.
 - Burst, Collections, Mathematics и Newtonsoft.Json должны быть явно прописаны в `Packages/manifest.json`, а не держаться на зависимостях других пакетов.
 - Цель — Android: IL2CPP, ARM64, только портретная ориентация.
 - Новые пакеты не добавлять без согласия автора.
@@ -25,12 +26,21 @@ Assets/Game/
   View/    Game.View  : модели, анимации, камера, эффекты
   UI/      Game.UI    : экраны, шторки, жесты
   Data/    JSON-описания контента (загрузка через Resources: Data/Resources/Defs/)
-  Debug/   Game.Debug : отладочная консоль и читы
-Assets/Tests/EditMode/   тесты Sim и Gen
-docs/                    GDD и задачи
+  DevTools/    Game.DevTools    : отладочная консоль, счётчик FPS и читы
+  App/         Game.App         : точка входа Bootstrap — единственное место, где системы связываются
+  EditorTools/ Game.EditorTools : только редактор — сборка сцены Bootstrap, настройки проекта, сборка APK (меню «The Murk»)
+Assets/Scenes/Bootstrap.unity   единственная сцена, собирается из кода
+Assets/Tests/EditMode/          тесты Sim и Gen
+docs/                           GDD и задачи
 ```
 
 Каждая папка с кодом — отдельный asmdef. У `Game.Sim` и `Game.Gen` стоит `noEngineReferences: true`.
+
+Ссылки между сборками: Gen → Sim; Voxel → Sim; View → Sim, Voxel; UI → Sim, View; DevTools → Sim, UI; App → все; EditorTools → App.
+
+Пространства имён `Game.Debug` и `Game.Editor` не заводить: внутри `Game.*` они перекрывают `UnityEngine.Debug` и `UnityEditor.Editor`.
+
+Хранилище блоков в `Game.Sim` — на обычных массивах: `NativeArray` живёт в UnityEngine. Для Burst `Game.Voxel` копирует данные чанка в `NativeArray`.
 
 ## Архитектура — обязательно
 
@@ -51,7 +61,8 @@ docs/                    GDD и задачи
 
 ## Проверка
 
-- Тесты `Game.Sim` и `Game.Gen` — в EditMode. Запускай их через Unity CLI после каждой правки логики.
+- Тесты `Game.Sim` и `Game.Gen` — в EditMode. Запускай их через Unity CLI после каждой правки логики: `unity test "<проект>" --mode EditMode --output <файл.xml>`.
+- Сборка APK из командной строки (редактор с этим проектом должен быть закрыт): `Unity.exe -batchmode -nographics -quit -projectPath "<проект>" -buildTarget Android -executeMethod Game.EditorTools.AndroidBuild.Build -logFile <лог>`. APK ложится в `Builds/Android/TheMurk.apk`.
 - Основная проверка — в редакторе: Play Mode с Device Simulator в портретном разрешении телефона. Только на телефоне проверяются жесты (мультитач) и производительность. Опиши автору, что и как проверить.
 - Отладочная консоль с первого дня: вызвать набег, выдать ресурсы, x10, вылечить всех и т. п. Новая система — новые команды консоли.
 

@@ -1,0 +1,21 @@
+{
+  "name": "Game.App",
+  "rootNamespace": "Game.App",
+  "references": [
+    "Game.Sim",
+    "Game.Gen",
+    "Game.Voxel",
+    "Game.View",
+    "Game.UI",
+    "Game.DevTools"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
